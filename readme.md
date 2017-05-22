@@ -1,3 +1,3 @@
-#rugal-core (under development)
+## rugal-core (under development)
 
 ![rugal](./rugal.gif-c200)
