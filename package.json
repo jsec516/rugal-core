@@ -1,12 +1,26 @@
 {
   "name": "rugal-core",
   "version": "1.0.0",
-  "description": "barebone e-commerce platform",
-  "main": "index.js",
+  "description": "rugal-core will contain all the e-commerce related logic like order, checkout, cart, shipping, tax, inventory",
+  "main": "./lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./index.js",
+    "test": "./node_modules/mocha/bin/_mocha lib/test/**/*.js"
   },
   "keywords": [],
   "author": "MD. Jahidul Islam",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.0.0",
+    "jscs": "^3.0.7",
+    "mocha": "^3.4.2",
+    "sinon": "^2.3.2"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "debug": "^2.6.8",
+    "express": "^4.15.3",
+    "lodash": "^4.17.4",
+    "nconf": "^0.8.4"
+  }
 }
