@@ -5,13 +5,15 @@
   "main": "./lib/index.js",
   "scripts": {
     "start": "node ./index.js",
-    "test": "./node_modules/mocha/bin/_mocha lib/test/**/*.js"
+    "test": "./node_modules/mocha/bin/_mocha lib/test/**/*.js",
+    "code-coverage": "istanbul cover --hook-run-in-context node_modules/mocha/bin/_mocha -- -R spec lib/test/**/*.js"
   },
   "keywords": [],
   "author": "MD. Jahidul Islam",
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.0.0",
+    "istanbul": "^0.4.5",
     "jscs": "^3.0.7",
     "mocha": "^3.4.2",
     "sinon": "^2.3.2"
