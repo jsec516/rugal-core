@@ -20,4 +20,4 @@ serverFactory()
                 console.timeEnd('RugalC boot');
                 debug('Server get started');
             })
-    }).catch(errors.utils.handleError);
+    }).catch(errors.handleError);
