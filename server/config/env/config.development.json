@@ -11,13 +11,5 @@
         "type": "password"
     },
     "useMinFiles": false,
-    "printErrorStack": true,
-    "caching": {
-        "theme": {
-            "maxAge": 0
-        },
-        "admin": {
-            "maxAge": 0
-        }
-    }
+    "printErrorStack": true
 }

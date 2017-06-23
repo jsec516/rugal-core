@@ -3,6 +3,7 @@ console.time('RugalC boot');
 require('ts-node/register');
 var debug           = require('debug')('rugalC:boot:index'),
     errors          = require('./server/errors'),
+    logging         = require('./server/logging'),
     express         = require('express'),
     expressApp      = express(),
     serverFactory   = require('./server').init;

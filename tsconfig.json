@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["es2017", "dom"],
+    "lib": ["es2017", "es6", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
     "baseUrl": "./",
@@ -20,7 +20,7 @@
     "noImplicitAny": false,
     "noImplicitReturns": true,
     "noImplicitThis": false,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noUnusedParameters": false
   },
   "exclude": [
