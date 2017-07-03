@@ -6,7 +6,7 @@ import { urlFor } from './utils';
 
 const moment = require('moment');
 const chalk = require('chalk');
-const debug = makeDebug('rugalC:server');
+const debug = makeDebug('rugalC:server:rugal-server');
 const config = require('./config');
 
 export default class RugalServer {
@@ -16,12 +16,14 @@ export default class RugalServer {
   public config;
 
   constructor(public rootApp) {
+    debug('initializing RugalServer...');
     this.httpServer = null;
     this.connections = {};
     this.connectionId = 0;
 
     // Expose config module for use externally.
     this.config = config;
+    debug('RugalServer done');
   }
 
   /**
@@ -32,6 +34,7 @@ export default class RugalServer {
    * @return {Promise} Resolves once Rugal has started
    */
    start(externalApp) {
+      debug('starting RugalServer...');
       let rootApp = externalApp ? externalApp : this.rootApp;
       return new Promise((resolve, reject) => {
         this.httpServer = rootApp.listen(

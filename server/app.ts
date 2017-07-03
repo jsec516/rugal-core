@@ -10,10 +10,10 @@ var express = require('express'),
     // middleware
     compress = require('compression');
 
-const debug = makeDebug('rugalC:app');
+const debug = makeDebug('rugalC:server:app');
 
 export function setupParentApp() {
-    debug('ParentApp setup start');
+    debug('initalizing express parentApp...');
     var parentApp = express();
     parentApp.use(logRequest);
 
@@ -43,7 +43,7 @@ export function setupParentApp() {
     // Front
     parentApp.use(frontend());
 
-    debug('ParentApp setup end');
+    debug('parentApp done');
 
     return parentApp;
 }

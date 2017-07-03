@@ -1,11 +1,11 @@
 var Nconf = require('nconf'),
     path = require('path'),
     _debug = require('debug'),
-    debug = _debug('rugalC:config'),
+    debug = _debug('rugalC:server:config'),
     env = process.env.NODE_ENV || 'development';
 
 function loadNconf(options = {}) {
-    debug('config start');
+    debug('initalizing config...');
 
     var baseConfigPath = __dirname,
     customConfigPath = options.customConfigPath || process.cwd(),
@@ -30,7 +30,7 @@ function loadNconf(options = {}) {
         debug(nconf.get());
     }
 
-    debug('config end');
+    debug('config done');
     return nconf;
 }
 

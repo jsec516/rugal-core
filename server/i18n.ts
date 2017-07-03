@@ -1,7 +1,7 @@
 import makeDebug from "debug";
 import { isArray, isEmpty, isNull, isString} from "lodash";
 
-const debug = makeDebug('rugalC:i18n'),
+const debug = makeDebug('rugalC:server:i18n'),
 supportedLocales    = ['en'];
 
 var fs                  = require('fs'),
