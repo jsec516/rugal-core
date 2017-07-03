@@ -1,0 +1,31 @@
+{
+    "errors": {
+        "httpServer": {
+            "addressInUse": {
+                "error": "(EADDRINUSE) Cannot start Rugal.",
+                "context": "Port {port} is already in use by another program.",
+                "help": "Is another Rugal instance already running?"
+            },
+            "otherError": {
+                "error": "(Code: {errorNumber})",
+                "context": "There was an error starting your server.",
+                "help": "Please use the error code above to search for a solution."
+            }
+        }
+    },
+    "notices": {
+        "httpServer": {
+            "cantTouchThis": "Can't touch this",
+            "rugalIsRunning": "Rugal is running...",
+            "yourAppIsAvailableOn": "\nYour application is now available on {url}",
+            "ctrlCToShutDown": "\nCtrl+C to shut down",
+            "rugalIsRunningIn": "Rugal is running in {env}...",
+            "listeningOn": "\nListening on",
+            "urlConfiguredAs": "\nUrl configured as: {url}",
+            "rugalHasShutdown": "\nRugal has shut down",
+            "yourAppIsNowOffline": "\nYour app is now offline",
+            "rugalWasRunningFor": "\nRugal was running for",
+            "rugalIsClosingConnections": "Rugal is closing connections"
+        }
+    }
+}

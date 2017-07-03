@@ -4,10 +4,11 @@ var Nconf = require('nconf'),
     debug = _debug('rugalC:config'),
     env = process.env.NODE_ENV || 'development';
 
-function loadNconf() {
+function loadNconf(options = {}) {
     debug('config start');
 
     var baseConfigPath = __dirname,
+    customConfigPath = options.customConfigPath || process.cwd(),
     nconf = new Nconf.Provider();
 
     // no channel can override the overrides
@@ -18,8 +19,7 @@ function loadNconf() {
 
     // env arguments
     nconf.env();
-
-    nconf.file('default-env', path.join(baseConfigPath, 'env', 'config.' + env + '.json'));
+    nconf.file('custom-env', path.join(customConfigPath, 'application', 'config', env+'.json'));
     nconf.file('defaults', path.join(baseConfigPath, 'defaults.json'));
 
     nconf.set('env', env);
