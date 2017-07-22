@@ -30,7 +30,7 @@ function deduplicateSubDir(url) {
 // - secure (optional, default:false) - boolean whether or not to force SSL
 // Returns:
 //  - a URL which always ends with a slash
-export function createUrl(urlPath, absolute, secure) {
+export function createUrl(urlPath, absolute, secure): string {
     urlPath = urlPath || '/';
     absolute = absolute || false;
     var base;
@@ -42,7 +42,7 @@ export function createUrl(urlPath, absolute, secure) {
         base = getSubdir();
     }
 
-    return urlJoin([base, urlPath]);
+    return urlJoin(base, urlPath);
 }
 
 /**
@@ -55,7 +55,7 @@ export function createUrl(urlPath, absolute, secure) {
  * @param {boolean} secure
  * @return {string} URL returns the url as defined in config, but always with a trailing `/`
  */
-export function getAppUrl(secure) {
+export function getAppUrl(secure): string {
     var appUrl;
 
     if (secure) {
@@ -75,7 +75,7 @@ export function getAppUrl(secure) {
  * Returns a subdirectory URL, if defined so in the config.
  * @return {string} URL a subdirectory if configured.
  */
-export function getSubdir() {
+export function getSubdir(): string {
     var localPath, subdir;
 
     // Parse local path location
@@ -101,7 +101,7 @@ export function getSubdir() {
 // urlFor('home', true) -> http://my-ghost-blog.com/
 // E.g. /blog/ subdir
 // urlFor({relativeUrl: '/my-static-page/'}) -> /blog/my-static-page/
-export function urlFor(context, data?, absolute?) {
+export function urlFor(context, data?, absolute?): string {
     let urlPath = '/',
         secure,
         baseUrl,
@@ -145,7 +145,7 @@ export function urlFor(context, data?, absolute?) {
  * @param {array} args takes args and concats those to a valid path/URL.
  * @return {string} URL concatinated URL/path of arguments.
  */
-export function urlJoin(args) {
+export function urlJoin(...args): string {
     var prefixDoubleSlash = false,
         url;
     

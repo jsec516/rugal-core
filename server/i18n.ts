@@ -59,7 +59,7 @@ export function init() {
  * @param {string} msgPath Path with in the JSON language file to desired string (ie: "errors.init.jsNotBuilt")
  * @returns {string}
  */
-export function findString(msgPath) {
+export function findString(msgPath: string): string | Array<any> {
     var matchingString, path;
     // no path? no string
     if (isEmpty(msgPath) || !isString(msgPath)) {
@@ -94,23 +94,22 @@ export function findString(msgPath) {
  * @param {object} [bindings]
  * @returns {string}
  */
-export function t(path, bindings?) {
-    var string = findString(path),
-        msg;
+export function t(path: string, bindings?: {[key: string]: any}): string {
+    var string: string | Array<any> = findString(path),
+        msg = [];
 
     // If the path returns an array (as in the case with anything that has multiple paragraphs such as emails), then
     // loop through them and return an array of translated/formatted strings. Otherwise, just return the normal
     // translated/formatted string.
     if (isArray(string)) {
-        msg = [];
         string.forEach(function (s) {
             var m = new MessageFormat(s, currentLocale);
             msg.push(m.format(bindings));
         });
     } else {
-        msg = new MessageFormat(string, currentLocale);
-        msg = msg.format(bindings);
+        let m = new MessageFormat(string, currentLocale);
+        msg.push(m.format(bindings));
     }
 
-    return msg;
+    return msg.join('\n\n');
 }

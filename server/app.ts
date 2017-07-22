@@ -3,6 +3,7 @@ import logRequest from './middleware/log-request';
 import api from '../application/api';
 import admin from '../application/admin';
 import frontend from '../application/frontend';
+import { Express } from "express";
 
 var express = require('express'),
     // app requires
@@ -12,14 +13,14 @@ var express = require('express'),
 
 const debug = makeDebug('rugalC:server:app');
 
-export function setupParentApp() {
+export function setupParentApp(): Express {
     debug('initalizing express parentApp...');
     var parentApp = express();
     parentApp.use(logRequest);
 
     if (debug.enabled) {
         // debug keeps a timer, so this is super useful
-        parentApp.use((function () {
+        parentApp.use((() => {
             var reqDebug = require('debug')('ghost:req');
             return function debugLog(req, res, next) {
                 reqDebug('Request', req.originalUrl);

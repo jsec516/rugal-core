@@ -1,8 +1,15 @@
 import { merge } from "lodash";
+
 import BaseError from "./BaseError";
+import { ErrorOptions } from '../types/errors';
+
+/**
+ * all the common errors that we know about is located in here
+ * this will help us to organize the errors and change the behavior of the error as we wish
+ */
 
 export class InternalServerError extends BaseError {
-    constructor(args) {
+    constructor(args: ErrorOptions) {
         const options = merge({
             statusCode: 500,
             level: 'critical',
@@ -14,7 +21,7 @@ export class InternalServerError extends BaseError {
 }
 
 export class NotFoundError extends BaseError {
-    constructor(args) {
+    constructor(args: ErrorOptions) {
         const options = merge({
             statusCode: 404,
             errorType: 'NotFoundError',
@@ -25,7 +32,7 @@ export class NotFoundError extends BaseError {
 }
 
 export class BadRequestError extends BaseError {
-    constructor(args) {
+    constructor(args: ErrorOptions) {
         const options = merge({
             statusCode: 400,
             errorType: 'BadRequestError',

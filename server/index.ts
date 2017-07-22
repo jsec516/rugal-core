@@ -2,11 +2,9 @@ import makeDebug from "debug";
 import { init as InitializeDb } from './db';
 import { init as InitializeCache } from "./cache";
 import { setupParentApp } from './app';
+import { Express } from "express";
 import RugalServer from './rugal-server';
 
-declare var global: any;
-// setup globals
-global.rugal = { test: 1};
 var i18n = require('./i18n');
 const debug = makeDebug('rugalC:server:index');
 const Promise = require("bluebird");
@@ -18,7 +16,7 @@ interface Server {
 export function init(options): Server {
   debug('initializing server creation procedure...');
 
-  var rugalCServer, parentApp;
+  var rugalCServer, parentApp: Express;
   // Initialize Internationalization
   i18n.init();
   debug('i18n done');

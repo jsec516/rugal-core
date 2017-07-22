@@ -1,13 +1,13 @@
+import * as chalk from 'chalk';
 import makeDebug from "debug";
+import * as moment from 'moment';
+import * as config from './config';
 import events from './events';
 import { t } from "./i18n";
 import { BaseError } from "./errors";
 import { urlFor } from './utils';
-
-const moment = require('moment');
-const chalk = require('chalk');
+import { Express } from "express";
 const debug = makeDebug('rugalC:server:rugal-server');
-const config = require('./config');
 
 export default class RugalServer {
   public httpServer;
@@ -33,9 +33,9 @@ export default class RugalServer {
    * @param  {Object} externalApp - Optional express app instance.
    * @return {Promise} Resolves once Rugal has started
    */
-   start(externalApp) {
+   start(externalApp: Express): Promise<RugalServer> {
       debug('starting RugalServer...');
-      let rootApp = externalApp ? externalApp : this.rootApp;
+      let rootApp: Express = externalApp ? externalApp : this.rootApp;
       return new Promise((resolve, reject) => {
         this.httpServer = rootApp.listen(
           config.get('server').port,
