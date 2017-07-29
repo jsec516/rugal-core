@@ -38,7 +38,7 @@ export default class BaseError extends Error {
      * which needs to convert to BaseError so that behavior can be consistent across the app 
      * @param err error that we need to convert
      */
-    private convertErrToBase(err) {
+    private convertErrToBase = (err) => {
         if (!err) {
             return;
         }
@@ -48,6 +48,11 @@ export default class BaseError extends Error {
         }
 
         Object.getOwnPropertyNames(err).forEach((property) => {
+
+            if (['errorType', 'name', 'statusCode', 'message', 'level'].indexOf(property) !== -1) {
+                return;
+            }
+
             if (property === 'stack') {
                 this[property] += '\n\n' + err[property];
                 return;

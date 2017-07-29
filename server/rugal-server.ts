@@ -33,7 +33,7 @@ export default class RugalServer {
    * @param  {Object} externalApp - Optional express app instance.
    * @return {Promise} Resolves once Rugal has started
    */
-   start(externalApp: Express): Promise<RugalServer> {
+   start(externalApp?: Express): Promise<RugalServer> {
       debug('starting RugalServer...');
       let rootApp: Express = externalApp ? externalApp : this.rootApp;
       return new Promise((resolve, reject) => {

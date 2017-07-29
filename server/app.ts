@@ -36,6 +36,10 @@ export function setupParentApp(): Express {
 
     // Mount the  apps on the parentApp
     // API
+    parentApp.get('/test1', function(req, res, next) {
+        console.log('awe are here');
+        res.send('me');
+    })
     parentApp.use('/rugal/api/v0.1/', api());
 
     // ADMIN

@@ -7,6 +7,7 @@ import BaseError from "./BaseError";
  * @param err error that has happened 
  */
 export function handleServerError(err) {
+    // console.log(err);
     if (!(err instanceof BaseError)) {
         err = new BaseError({err: err});
     }
@@ -15,6 +16,7 @@ export function handleServerError(err) {
         process.send({started: false, error: err.message});
     }
 
+    console.error(err);
     //TODO: send error to logger too.
     // logging.error(err);
     process.exit(-1);

@@ -1,7 +1,7 @@
 console.time('RugalC boot');
 require('ts-node/register');
 
-let debug           = require('debug')('rugalC:index'),
+var debug           = require('debug')('rugalC:index'),
     express         = require('express'),
 
     errors          = require('./server/errors'),
@@ -19,7 +19,7 @@ debug('initializing Rugal Web Instance...');
  */
 serverFactory()
 .then(function startServer(rugalServer) {
-    rugalServer.start(expressApp)
+    rugalServer.start()
     .then(function afterServerStart() {
         console.timeEnd('RugalC boot');
         debug('Server get started');

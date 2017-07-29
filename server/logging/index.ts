@@ -1,10 +1,7 @@
-import { RugalLogger } from './RugalLogger';
-// observe how ghost, traider managed it
-// in sails it's in global sails object which was handy
-// start the logger at the beginning of the req
-// assign that on globals
-// use it whereever required
 var config = require('../config');
+
+import { RugalLogger } from './RugalLogger';
+
 var logger = new RugalLogger({
     env: config.get('env'),
     path: config.get('logging:path'),

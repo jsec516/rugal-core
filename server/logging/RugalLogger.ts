@@ -1,28 +1,29 @@
-import { each, isObject, isArray } from "lodash";
-import { RugalPrettyStream } from './RugalPrettyStream';
-
 const   bunyan = require('bunyan'),
         fs     = require('fs'),
         jsonStringifySafe = require('json-stringify-safe');
 
-export class RugalLogger{
-    env: string;
+import { each, isObject, isArray } from "lodash";
+import { RugalPrettyStream } from './RugalPrettyStream';
+import { LoggerOptions } from '../types/logging';
+
+export class RugalLogger {
     domain: string;
-    transports: string[];
+    env: string;
     level: string;
     mode: string;
     path: string;
     rotation: any;
     serializers: any;
     streams: any;
+    transports: string[];
 
-    constructor(options:any) {
-        this.env = options.env || 'development';
+    constructor(options: LoggerOptions) {
         this.domain = options.domain || 'localhost';
-        this.transports = options.transports || ['stdout'];
+        this.env = options.env || 'development';
         this.level = process.env.LEVEL || options.level || 'info';
         this.mode = process.env.MODE || options.mode || 'short';
         this.path = options.path || process.cwd();
+        this.transports = options.transports || ['stdout'];
 
         // special env variable to enable long mode and level info
         if (process.env.LOIN) {
@@ -101,16 +102,19 @@ export class RugalLogger{
         });
     }
 
-    info(args) {
+    info(...args) {
         this.log('info', args);
     }
-    warn(args) {
+    
+    warn(...args) {
         this.log('warn', args);
     }
 
-    error(args) {
+    error(...args) {
         this.log('error', args);
     }
+
+    //TODO: set papertrail support
     private setStdoutStream () {
         var prettyStdOut = new RugalPrettyStream({
             mode: this.mode
