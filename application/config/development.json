@@ -1,0 +1,22 @@
+{
+    "url": "http://localhost:2368",
+    "database": {
+        "client": "mongo",
+        "connection": {
+            "uri": "content/data/ghost-dev.db"
+        },
+        "debug": false
+    },
+    "cache": {
+        "client": "redis",
+        "connection": {
+            "uri": "content/data/ghost-dev.db"
+        },
+        "debug": false
+    },
+    "auth": {
+        "type": "password"
+    },
+    "useMinFiles": false,
+    "printErrorStack": true
+}
