@@ -1,16 +1,15 @@
+import chalk from 'chalk';
+import MessageFormat from 'intl-messageformat'
 import makeDebug from "debug";
+import { readFileSync } from "fs";
 import { isArray, isEmpty, isNull, isString} from "lodash";
 
-const debug = makeDebug('rugalC:server:i18n'),
-supportedLocales    = ['en'];
+const   debug               = makeDebug('rugalC:server:i18n'),
+        supportedLocales    = ['en'];
 
-var fs                  = require('fs'),
-    chalk               = require('chalk'),
-    MessageFormat       = require('intl-messageformat'),
-
-    // TODO: fetch this dynamically based on config settings (`key = "default_locale"`) in the `settings` table
-    currentLocale       = 'en',
-    blos;
+// TODO: fetch currentLocale dynamically based on config settings (`key = "default_locale"`) in the `settings` table
+let     currentLocale       = 'en',
+        blos;
 
 /**
  * Setup i18n support:
@@ -20,7 +19,7 @@ var fs                  = require('fs'),
 export function init() {
     debug('initializing i18n...');
     // read file for current locale and keep its content in memory
-    blos = fs.readFileSync(__dirname + '/translations/' + currentLocale + '.json');
+    blos = readFileSync(__dirname + '/translations/' + currentLocale + '.json');
 
     // if translation file is not valid, you will see an error
     try {
