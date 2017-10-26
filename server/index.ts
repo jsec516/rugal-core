@@ -24,11 +24,11 @@ export function init(options): Server {
   // @TODO: need to make it work, ensure that db connected
   debug('initializing database...');
   return dbService.ok()
-  .then(function buildParentApp() {
+  .do(function buildParentApp() {
     debug('database done');
     parentApp = getParentApp();
   })
-  .then(function rugalServer() {
+  .map(function rugalServer() {
     return new RugalServer(parentApp);
   });
 }

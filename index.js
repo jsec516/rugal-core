@@ -11,12 +11,12 @@ const   debug           = require('debug')('rugalC:index'),
 debug('initializing Rugal Server Instance...');
 
 generateServer()
-    .then(function startServer(server) {
+    .catch(errors.handleServerError)
+    .subscribe(function startServer(server) {
         server.start()
         .then(function afterServerStart() {
             debug('Server get started');
             performance.end();
             logger.info('Server get started, time taken ', performance.result());
         });
-    })
-    .catch(errors.handleServerError);
+    });

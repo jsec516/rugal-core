@@ -1,5 +1,6 @@
 import makeDebug from "debug";
 import { Express } from "express";
+import { resolve as resolvePath } from "path";
 import admin from '../application/admin';
 import api from '../application/api';
 import frontend from '../application/frontend';
@@ -13,7 +14,9 @@ const   debug = makeDebug('rugalC:server:app');
 
 export function getParentApp(): Express {
     debug('initalizing express parentApp...');
-    let parentApp = express();
+    let parentApp = express(),
+        staticPath = resolvePath(__dirname, '../public');
+    
     parentApp.use(logRequest);
 
     if (debug.enabled) {
@@ -26,6 +29,8 @@ export function getParentApp(): Express {
     }
 
     // mount the endpoints
+    
+    parentApp.use('/assets', express.static(staticPath));
     parentApp.use('/api/v0.1/', api());
     parentApp.use('/admin', admin());
     parentApp.use(frontend());
