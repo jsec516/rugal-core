@@ -1,27 +1,22 @@
-console.time('RugalC boot');
 require('ts-node/register');
+const   performance     = require('./server/utils/performance').init();
+performance.start();
 
-var debug           = require('debug')('rugalC:index'),
-    express         = require('express'),
+const   debug           = require('debug')('rugalC:index'),
+        express         = require('express'),
+        errors          = require('./server/errors'),
+        generateServer  = require('./server').init,
+        logger          = require('./server/logging').default;       ;
 
-    errors          = require('./server/errors'),
-    expressApp      = express(),
-    logging         = require('./server/logging'),
-    serverFactory   = require('./server').init;
+debug('initializing Rugal Server Instance...');
 
-debug('initializing Rugal Web Instance...');
-
-/**
- * this will prepare the express app instance, act as server for us
- * serverFactory() will do the trick for us and returns express instance
- * using that we will start the server which will listen for request
- * at the end of the day, delegate any kind of server related error to error module
- */
-serverFactory()
-.then(function startServer(rugalServer) {
-    rugalServer.start()
-    .then(function afterServerStart() {
-        console.timeEnd('RugalC boot');
-        debug('Server get started');
+generateServer()
+    .catch(errors.handleServerError)
+    .subscribe(function startServer(server) {
+        server.start()
+        .then(function afterServerStart() {
+            debug('Server get started');
+            performance.end();
+            logger.info('Server get started, time taken ', performance.result());
+        });
     });
-}).catch(errors.handleServerError);

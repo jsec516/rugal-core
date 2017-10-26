@@ -1,13 +1,11 @@
-import makeDebug from "debug";
-import { init as InitializeDb } from './db';
-import { init as InitializeCache } from "./cache";
-import { setupParentApp } from './app';
 import { Express } from "express";
+import makeDebug from "debug";
+import { getParentApp } from './app';
+import { init as InitializeDb } from './db';
+import { init as Initializei18n } from './i18n';
 import RugalServer from './rugal-server';
 
-var i18n = require('./i18n');
 const debug = makeDebug('rugalC:server:index');
-const Promise = require("bluebird");
 
 interface Server {
   start(parentApp: any);
@@ -16,20 +14,21 @@ interface Server {
 export function init(options): Server {
   debug('initializing server creation procedure...');
 
-  var rugalCServer, parentApp: Express;
+  let parentApp: Express,
+      dbService;
   // Initialize Internationalization
-  i18n.init();
+  Initializei18n();
   debug('i18n done');
 
-  let dbService = InitializeDb();
+  dbService = InitializeDb();
   // @TODO: need to make it work, ensure that db connected
   debug('initializing database...');
   return dbService.ok()
-  .then(function buildParentApp() {
+  .do(function buildParentApp() {
     debug('database done');
-    parentApp = setupParentApp();
+    parentApp = getParentApp();
   })
-  .then(function rugalServer() {
+  .map(function rugalServer() {
     return new RugalServer(parentApp);
   });
 }

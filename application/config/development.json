@@ -1,9 +1,9 @@
 {
     "url": "http://localhost:2368",
     "database": {
-        "client": "mongo",
+        "client": "mongodb",
         "connection": {
-            "uri": "content/data/ghost-dev.db"
+            "uri": "mongodb://localhost:27017/rugal"
         },
         "debug": false
     },
